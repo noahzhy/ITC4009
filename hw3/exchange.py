@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
-from keras.utils.np_utils import to_categorical
 from keras.preprocessing.image import ImageDataGenerator
 
 
@@ -151,7 +150,7 @@ if __name__ == "__main__":
 
     # E-02
     image_size = (28, 28)
-    inputs = (28, 28)
+    inputs = (28, 28, 1)
     outputs = 10
     # high-level model architecture with data augmentation
     train_ds, test_ds = loading_fashion_dataset()
