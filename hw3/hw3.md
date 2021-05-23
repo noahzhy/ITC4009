@@ -12,6 +12,10 @@ Put simply, there are three parts of difference, data augmentation, model archit
 
 Thus, I modify the some code to decide data augmentation is turned on or not. Second, to change the model architecture. Last, to show the evaluation results or not when precessing of training in each epoch.
 
+## Code
+
+The experiment code [here]().
+
 ## Experiments
 
 ### E-01
