@@ -171,9 +171,13 @@ def predict():
 def train(train_ds, val_ds, model, epochs=20):
     history = model.fit(
         train_ds,
-        validation_data=val_ds,
         epochs=epochs
     )
+    # history = model.fit(
+    #     train_ds,
+    #     validation_data=val_ds,
+    #     epochs=epochs
+    # )
     return history
 
 
