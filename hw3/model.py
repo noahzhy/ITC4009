@@ -8,11 +8,14 @@ import matplotlib.pyplot as plt
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
+from keras.preprocessing.image import ImageDataGenerator
 
 
 batch_size = 32
 img_height = 180
 img_width = 180
+
+seed = 123
 
 
 def download_dataset():
@@ -26,37 +29,46 @@ def download_dataset():
 
 
 def data_preprocessing(data_dir):
-    train_ds = tf.keras.preprocessing.image_dataset_from_directory(
-        data_dir,
+    train_gen = ImageDataGenerator(
         validation_split=0.2,
+        rescale=1./255,
+        rotation_range=20,
+        featurewise_center=True,
+        featurewise_std_normalization=True,
+        vertical_flip=True,
+        horizontal_flip=True,
+        brightness_range=[0.2,1.0],
+        zoom_range=[0.5,10]
+    )
+    test_gen = ImageDataGenerator(
+        validation_split=0.2,
+        rescale=1./255,
+    )
+
+    train_ds = train_gen.flow_from_directory(
+        data_dir,
         subset="training",
-        seed=123,
-        image_size=(img_height, img_width),
+        seed=seed,
+        target_size=(img_height, img_width),
+        class_mode="categorical",
+        color_mode="rgb",
         batch_size=batch_size
     )
-    val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+    val_ds = test_gen.flow_from_directory(
         data_dir,
-        validation_split=0.2,
         subset="validation",
-        seed=123,
-        image_size=(img_height, img_width),
+        seed=seed,
+        target_size=(img_height, img_width),
+        class_mode="categorical",
+        color_mode="rgb",
         batch_size=batch_size
     )
-    class_names = train_ds.class_names
-    print(class_names)
 
-    AUTOTUNE = tf.data.AUTOTUNE
-    train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
-    val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
+    # AUTOTUNE = tf.data.AUTOTUNE
+    # train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
+    # val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
-    normalization_layer = layers.experimental.preprocessing.Rescaling(1./255)
-    normalized_ds = train_ds.map(lambda x, y: (normalization_layer(x), y))
-    image_batch, labels_batch = next(iter(normalized_ds))
-    first_image = image_batch[0]
-
-    print(np.min(first_image), np.max(first_image))
-
-    return normalized_ds, val_ds
+    return train_ds, val_ds
 
 
 def build_model(num_classes=5):
@@ -76,7 +88,7 @@ def build_model(num_classes=5):
 
     model.compile(
         optimizer='adam',
-        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        loss='categorical_crossentropy',
         metrics=['accuracy']
     )
     model.summary()
