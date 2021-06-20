@@ -4,7 +4,7 @@
 
 This project mainly discusses related problem of image classification in embedded device through some simple tasks to discuss them. It includes three parts:
 
-1. The effect of using only green channel to replace the grayscale channel as input.
+1. The effect of using only one channel of RGB channels to replace the grayscale image as input.
 
 2. The representative mobile network shuffleNet V2 and it's improvements.
 
@@ -14,7 +14,7 @@ This project mainly discusses related problem of image classification in embedde
 
 The traditional neural network, mAP, FLOPs and other evaluation indicators are not suitable for mobile devices or embedded devices in the actual project deployment. Mobile devices or embedded devices have limited clock rate and memory, and come with accelerated hardware for tasks in deep learning. These limitations are often overlooked, thus this project focuses on the deployment of some neural networks on mobile devices or embedded devices.
 
-In the first topic, because of memory limitations in many embedded devices. If using RGB channel, it will open at least (width x height x channels x type of data) memory space. In addition, the clock rate of many embedded devices is around 200 MHz. Even converting an RGB image to a grayscale image is a huge drain on computing power (see Appendix 1). Therefore, if a channel in RGB channels can be directly used for the input of neural network via a memory pointer, it will greatly improve the efficiency of embedded device without the step of RGB to grayscale in deep learning. This topic discusses the effect of a single channel on recognition accuracy.
+In the first topic, because of memory limitations in many embedded devices. If using RGB channel, it will open at least (width x height x channels x type of data) memory space. In addition, the clock rate of many embedded devices is around 200 MHz. Even converting an RGB image to a grayscale image is a huge drain on computing power (detail in Appendix 1). Therefore, if one channel in RGB channels can be directly used for the input of neural network via a memory pointer, it will greatly improve the efficiency of embedded device without the step of RGB to grayscale in deep learning. This topic discusses the effect of a single channel on recognition accuracy.
 
 In the second topic, it is mainly an improvement of shuffleNet V2. In recognition or detection tasks for embedded devices, the relatively distance between the device and the object being detected is generally fixed. The traditional object detection and recognition networks usually consider the complex situation of small object or overlapping object, which is not suitable for the deep learning task of embedded devices.
 
