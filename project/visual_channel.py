@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 channel_list = list()
 channel_initials = list('BGR')
 channel_labels = ['grayscale','Blue','Green','Red']
-image = cv2.imread('project/lenna.jpg')
+image = cv2.imread('project/images/lenna.jpg')
 
 channel_list.append(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY))
 

@@ -77,7 +77,7 @@ In the 2nd topics, choose the representative blocks in MobileNet v2, shuffleNet 
 
 | Block  | ResNet V1                                                    | MobileNet V2 block                                           | ShuffleNet V2 block                                          |
 | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Figure | <img src="C:\Users\noahz\AppData\Roaming\Typora\typora-user-images\image-20210622233240301.png" alt="image-20210622233240301" style="zoom:70%;" /> | <img src="C:\Users\noahz\AppData\Roaming\Typora\typora-user-images\image-20210622233252835.png" alt="image-20210622233252835" style="zoom:70%;" /> | <img src="C:\Users\noahz\AppData\Roaming\Typora\typora-user-images\image-20210622233425446.png" alt="image-20210622233425446" style="zoom:70%;" /> |
+| Figure | <img src="images/001.png" style="zoom:70%;" /> | <img src="images/002.png" style="zoom:70%;" /> | <img src="images/003.png" style="zoom:70%;" /> |
 
 ### ResNet(residual block)
 
@@ -167,7 +167,7 @@ It's test on google edge computing hardware.
 
 Before I started this experiment, I thought that keeping only the Green channel would be the closest to the grayscale accuracy, since the RGB565 color format only has a 6 bit green channel. And through the simple image visualization is not difficult to see, the green channel is closer to the grayscale image.
 
-<img src="C:\Users\noahz\Desktop\channels.png" alt="test" style="zoom:80%;" />
+<img src="channels.png" alt="test" style="zoom:80%;" />
 
 From the results I, the recognition accuracy of green channel is higher than that of grayscale image. The guess is that the information redundancy of the other two color channels reduces the accuracy of the recognition.
 
