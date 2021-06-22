@@ -27,11 +27,9 @@ The dataset in this project is `cifar10`.
 
 ## Methodology
 
-控制变量，在相同的神经网络中，更换不同的inputs，blocks，硬件平台来测试。
+In topic one, the same neural network(MobileNet V2) was used but change the channel of inputs to test the effect of one single channel on the accuracy of image recognition.
 
-在主题一中，使用相同的神经网络，通过改变inputs 的channel，来测试单纯某一channel对于图片识别的精度的影响。
-
-改造了一下数据集的生成器，可以选择只保留RGB中的某一通道或者转换成灰度图。
+Modified the generator of dataset, thus we could choose generate only one channel in RGB images or convert to grayscale images.
 
 ```python
 def dataset_generator(dataset, batch_size=256, num_classes=10, is_training=False, color_mode="grayscale"):
